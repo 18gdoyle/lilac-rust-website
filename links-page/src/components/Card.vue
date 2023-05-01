@@ -12,7 +12,7 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 
 .cardContainer {
   transform: scale(1.5);

@@ -25,29 +25,6 @@ window.onload = () => {
   animate();
 }
 
-function loadModel(objURL, meshMaterial) {
-  let loader = new OBJLoader();
-  loader.load(objURL, function ( object ) {
-    pouch = new THREE.Mesh(
-      object.children[0].geometry,
-      new THREE.MeshStandardMaterial(meshMaterial)
-    );
-    scene.add(pouch);
-
-    if (!object.children[1]) {
-      return;
-    }
-  
-    hangHole = new THREE.Mesh(
-      object.children[1].geometry,
-      new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-      })
-    );
-    scene.add(hangHole);
-  });
-}
-
 function init() {
   container = document.getElementById("container");
 
@@ -141,8 +118,7 @@ function init() {
 
   updateSun();
 
-  //
-
+  /*
   const geometry = new THREE.BoxGeometry(30, 30, 30);
   let texture = new THREE.TextureLoader().load(lilacRustImg);
   const material = new THREE.MeshStandardMaterial({map: texture});
@@ -152,14 +128,11 @@ function init() {
   mesh.name = "GoogleDriveCube";
   scene.add(mesh);
 
-  camera.position.x = camera.position.x + 1;
-  camera.updateProjectionMatrix();
-
-  //
+  */
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.maxPolarAngle = Math.PI * 0.495;
-  controls.target.set(0, 10, 0);
+  controls.target.set(40, 10, 0);
   controls.minDistance = 40.0;
   controls.maxDistance = 200.0;
   controls.autoRotate = true;
@@ -186,9 +159,6 @@ function animate() {
 
 function render() {
   const time = performance.now() * 0.001;
-
-  mesh.rotation.x = time * 0.5;
-  mesh.rotation.z = time * 0.51;
 
   water.material.uniforms["time"].value += 1.0 / 60.0;
 
