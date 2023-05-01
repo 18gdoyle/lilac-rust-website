@@ -7,73 +7,46 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { Water } from "three/addons/objects/Water.js";
 import { Sky } from "three/addons/objects/Sky.js";
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
-import googleDriveImg from '../assets/textures/googleDrive.png';
-import memeImage from '../assets/textures/ffe.png';
+import lilacRustImg from '../assets/textures/lilacrustpfimage.jpg'
 import waterTexture from '../assets/textures/waternormals.jpg';
+//import boatModel from '../assets/models/Boat.obj'
+//import eyeballModel from '../assets/models/Eye_Sphere.fbx'
 
 let container;
 let camera, scene, renderer;
 let controls, water, sun, mesh, mesh2;
 let skyUniforms;
 let add = true;
-let timeout;
-
-let raycaster = new THREE.Raycaster(); // create once
-let pointer = new THREE.Vector2(); // create once
 
 window.onload = () => {
   init();
   animate();
-
-  window.onclick = (event) => {
-    clearTimeout(timeout);
-    controls.autoRotate = false;
-    controls.update();
-    timeout = setTimeout(() => {
-      controls.autoRotate = true;
-      controls.update();
-    }, 5000)
-
-    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	  pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-    // update the picking ray with the camera and pointer position
-	  raycaster.setFromCamera( pointer, camera );
-
-    // calculate objects intersecting the picking ray
-    const intersects = raycaster.intersectObjects( scene.children );
-
-    for ( let i = 0; i < intersects.length; i ++ ) {
-      if (intersects[i].object.name === "GoogleDriveCube") {
-        window.open('https://drive.google.com/drive/folders/15z394rGnvMeDxHZTCDx6tAVo5dgbZ5E8?usp=share_link', '_blank');
-      } else if (intersects[i].object.name === "secondCube") {
-        window.open('https://www.youtube.com/shorts/QJUzcY29blQ', '_blank');
-      }
-    }
-  }
-
-  window.addEventListener("touchstart", (event) => {
-    pointer.x = ( event.pageX / window.innerWidth ) * 2 - 1;
-    pointer.y = - ( event.pageY / window.innerHeight ) * 2 + 1;
-
-    // update the picking ray with the camera and pointer position
-    raycaster.setFromCamera( pointer, camera );
-
-    // calculate objects intersecting the picking ray
-    const intersects = raycaster.intersectObjects( scene.children );
-
-    for ( let i = 0; i < intersects.length; i ++ ) {
-      if (intersects[i].object.name === "GoogleDriveCube") {
-        window.open('https://drive.google.com/drive/folders/15z394rGnvMeDxHZTCDx6tAVo5dgbZ5E8?usp=share_link', '_top');
-      } else if (intersects[i].object.name === "secondCube") {
-        window.open('https://www.youtube.com/shorts/QJUzcY29blQ', '_top');
-      }
-    }
-  })
 }
 
+function loadModel(objURL, meshMaterial) {
+  let loader = new OBJLoader();
+  loader.load(objURL, function ( object ) {
+    pouch = new THREE.Mesh(
+      object.children[0].geometry,
+      new THREE.MeshStandardMaterial(meshMaterial)
+    );
+    scene.add(pouch);
 
+    if (!object.children[1]) {
+      return;
+    }
+  
+    hangHole = new THREE.Mesh(
+      object.children[1].geometry,
+      new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+      })
+    );
+    scene.add(hangHole);
+  });
+}
 
 function init() {
   container = document.getElementById("container");
@@ -96,7 +69,7 @@ function init() {
     1,
     20000
   );
-  camera.position.set(30, 30, 100);
+  camera.position.set(60, 30, 100);
 
   const ambientLight = new THREE.AmbientLight(0xffffff, .6);
   scene.add(ambientLight);
@@ -171,21 +144,16 @@ function init() {
   //
 
   const geometry = new THREE.BoxGeometry(30, 30, 30);
-  let texture = new THREE.TextureLoader().load(googleDriveImg);
+  let texture = new THREE.TextureLoader().load(lilacRustImg);
   const material = new THREE.MeshStandardMaterial({map: texture});
 
   mesh = new THREE.Mesh(geometry, material);
+  mesh.position.y = 30;
   mesh.name = "GoogleDriveCube";
   scene.add(mesh);
 
-  const geometry2 = new THREE.BoxGeometry(20, 20, 20);
-  let texture2 = new THREE.TextureLoader().load(memeImage);
-  const material2 = new THREE.MeshStandardMaterial({map: texture2});
-
-  mesh2 = new THREE.Mesh(geometry2, material2);
-  mesh2.position.set(60,30,0);
-  mesh2.name = "secondCube";
-  scene.add(mesh2);
+  camera.position.x = camera.position.x + 1;
+  camera.updateProjectionMatrix();
 
   //
 
@@ -195,7 +163,11 @@ function init() {
   controls.minDistance = 40.0;
   controls.maxDistance = 200.0;
   controls.autoRotate = true;
+  controls.enabled = false;
   controls.update();
+
+  //loadModel(boatModel, {color: 0x000000});
+  
 
   window.addEventListener("resize", onWindowResize);
 }
@@ -215,12 +187,8 @@ function animate() {
 function render() {
   const time = performance.now() * 0.001;
 
-  mesh.position.y = Math.sin(time) * 20 + 5;
   mesh.rotation.x = time * 0.5;
   mesh.rotation.z = time * 0.51;
-
-  mesh2.rotation.x = time * 0.5;
-  mesh2.rotation.z = time * 0.51;
 
   water.material.uniforms["time"].value += 1.0 / 60.0;
 
@@ -236,7 +204,7 @@ function render() {
     skyUniforms["turbidity"].value = skyUniforms["turbidity"].value - .00025;
   }
 
-  controls.update();
+  //controls.update();
 
   renderer.render(scene, camera);
 }
