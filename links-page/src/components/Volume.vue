@@ -72,6 +72,9 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-
+  .muteButton {
+    margin-top: 8%;
+    width: 70%;
+  }
 }
 </style>
