@@ -1,73 +1,35 @@
 <template>
   <div class="cardContainer">
-    <div class="article-card">
-      <div class="content">
-        <p class="title">Stream the music</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1482877346909-048fb6477632?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=958&q=80" alt="article-cover" />
-    </div>
+    <a href="https://li.sten.to/lilac_rust" class="htmlOverlay">
+      <h1>{{ title }}</h1>
+    </a>
   </div>
 </template>
 
 <script>
+export default {
+  props: {
+    title: String,
+
+  }
+}
 </script>
 
 <style scoped>
-
 .cardContainer {
-  transform: scale(1.5);
+  width: 80vw;
+  height: 15vh;
+  margin: auto;
+  background-color: rgba(255, 255, 255, .15);  
+  backdrop-filter: blur(5px);
+}
+.htmlOverlay {
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 80%;
+  color: white;
 }
-
-.article-card {
-  width: 60%;
-  height: 10%;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  font-family: Arial, Helvetica, sans-serif;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 300ms;
-}
-
-.article-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.article-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.article-card .content {
-  box-sizing: border-box;
-  width: 100%;
-  position: absolute;
-  padding: 30px 20px 20px 20px;
-  height: auto;
-  bottom: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
-}
-
-.article-card .date,
-.article-card .title {
-  margin: 0;
-}
-
-.article-card .date {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 4px;
-}
-
-.article-card .title {
-  font-size: 17px;
-  color: #fff;
-}
-
 </style>
