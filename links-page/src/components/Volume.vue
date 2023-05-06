@@ -41,5 +41,10 @@ export default {
 <style scoped>
 
 .muteButton {
+  position: absolute;
+  bottom: 0;
+  right: 2%;
+  background-color: rgba(255, 255, 255, .15);  
+  backdrop-filter: blur(5px);
 }
 </style>

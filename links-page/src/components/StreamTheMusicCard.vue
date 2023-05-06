@@ -2,15 +2,9 @@
   <div class="cardContainer">
     <div class="card">
       <a :href=href class="cardItemsContainer">
-        <img alt="Lilac Rust on AirBit" 
-          src="../assets/airbit-image.webp" 
-          class="cardIcon"
-        />
+        <i class="fa-brands fa-soundcloud cardIcon"></i>
         <h1 class="cardTitle">{{ title }}</h1>
-        <img alt="Lilac Rust on AirBit" 
-          src="../assets/airbit-image.webp" 
-          class="cardIcon"
-        />
+        <i class="fa-brands fa-soundcloud cardIcon"></i>
       </a>
     </div>
   </div>
@@ -53,6 +47,6 @@ export default {
 }
 
 .cardIcon {
-  height: 10vh;
+  font-size: 10vh;
 }
 </style>
