@@ -60,13 +60,19 @@ export default {
 .muteButtonContainer {
   position: relative;
   width: 100%;
-  height: 7vh;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
 }
 .cardsContainer {
   width: 100%;
   height: 75vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
 }
 
 .socialMediaLinksContainer {
@@ -74,7 +80,6 @@ export default {
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  height: 18vh;
 }
 
 .socialMediaButton {
@@ -97,9 +102,11 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-  .cardContainer {
-    margin-left: 10vw;
-    width: 80vw;
+
+  .muteButtonContainer {
+    position: relative;
+    width: 100%;
+    height: 10vh;
   }
 }
 </style>

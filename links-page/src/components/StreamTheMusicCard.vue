@@ -20,12 +20,10 @@ export default {
 </script>
 
 <style scoped>
-.cardContainer {
-  margin: auto;
-}
 
 .card {
-  width: 80vw;
+  margin: auto;
+  width: 80%;
   height: 15vh;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, .15);
@@ -45,8 +43,19 @@ export default {
   font-size: 80%;
   color: white;
 }
-
 .cardIcon {
   font-size: 10vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    padding: 2vw;
+  }
+  .cardItemsContainer {
+    font-size: 60%;
+  }
+  .cardIcon {
+    font-size: 5vh;
+  }
 }
 </style>

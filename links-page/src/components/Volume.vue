@@ -1,9 +1,17 @@
 <template>
   <button class="muteButton" @click="playAudio" v-if="!audioPlaying">
-    <i class="fa-solid fa-volume-xmark"></i>
+    <i class="fa-solid fa-volume-xmark volumeIcon"></i>
+    <h2 class="buttonText">
+      Start Vibe
+    </h2>
+    <i class="fa-solid fa-volume-xmark volumeIcon"></i> 
   </button>
   <button class="muteButton" @click="stopAudio" v-if="audioPlaying">
-    <i class="fa-solid fa-volume-high"></i>
+    <i class="fa-solid fa-volume-high volumeIcon"></i>
+    <h2 class="buttonText">
+      End Vibe
+    </h2>
+    <i class="fa-solid fa-volume-high volumeIcon"></i> 
   </button>
   <div class="audioElementContainer">
     <div class="audioElement">
@@ -39,12 +47,31 @@ export default {
 </script>
 
 <style scoped>
-
+.buttonText {
+  text-align: center;
+}
+.volumeIcon {
+  font-size: 3vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
 .muteButton {
-  position: absolute;
-  bottom: 0;
-  right: 2%;
-  background-color: rgba(255, 255, 255, .15);  
+  margin: auto;
+  margin-top: 1.5%;
+  width: 20%;
+  height: 80%;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, .15);
   backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80%;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+
 }
 </style>

@@ -26,11 +26,8 @@ export default {
 </script>
 
 <style scoped>
-.cardContainer {
-  margin: auto;
-}
-
 .card {
+  margin: auto;
   width: 80vw;
   height: 15vh;
   border-radius: 20px;
@@ -54,5 +51,17 @@ export default {
 
 .cardIcon {
   height: 10vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    padding: 2vw;
+  }
+  .cardItemsContainer {
+    font-size: 60%;
+  }
+  .cardIcon {
+    height: 5vh;
+  }
 }
 </style>
