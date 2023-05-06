@@ -102,11 +102,13 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-
   .muteButtonContainer {
     position: relative;
     width: 100%;
     height: 10vh;
+  }
+  .cardsContainer {
+    height: 65vh;
   }
 }
 </style>
